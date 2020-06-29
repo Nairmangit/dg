@@ -1,0 +1,42 @@
+<!doctype  html>
+<html  lang="ru">
+	<head>
+		<title>Личный кабинет</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+	  <div  class="container-fluid">
+			<div class="row"></div>
+			<div class="row">
+					<div class="col"></div>
+					<div class="col">
+						<ul class="list-group">
+							<li class="list-group-item">Температура за выбранный период времени</li>
+							<li class="list-group-item">
+								<form method="POST" action="{% url 'grathtime' sensid %}">
+									{% csrf_token %}
+									Выберите дату: {{form.date}}
+									<button class="btn btn-primary" type="submit">Построить</button>
+								</form>
+								<form method="POST" action="{% url 'grath' sensid %}">
+									{% csrf_token %}
+									График за все время
+									<button class="btn btn-primary" type="submit">Построить</button>
+								</form>
+							</li>
+							<li class="list-group-item">
+								<form action="{% url 'lk' %}">
+									<button class="btn btn-primary" type="submit">Вернуться</button>
+								</form>
+							</li>
+						</ul>
+					</div>
+					<div class="col"></div>
+			</div>
+			<div class="row"></div>
+	  </div>
+	</body>
+</html>

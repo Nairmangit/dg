@@ -1,0 +1,65 @@
+<!doctype  html>
+<html  lang="ru">
+	<head>
+		<title>Личный кабинет</title>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+	</head>
+	<body>
+	  <div  class="container-fluid">
+			<div class="row"></div>
+			<div class="row">
+					<div class="col-3">
+						<li class="list-group-item">Объекты</li>
+				    <div class="list-group" id="list-tab" role="tablist">
+							{% for obj in obj_list %}
+				      	<a class="list-group-item list-group-item-action" id="{{obj.name}}-list" data-toggle="list" href="#list-{{obj.name}}" role="tab">{{obj.name}}</a>
+							{% endfor %}
+							<li class="list-group-item">
+								<form action="{% url 'loggout' %}">
+									<button class="btn btn-primary" type="submit">Выйти</button>
+								</form>
+							</li>
+				    </div>
+				  </div>
+				  <div class="col-8">
+				    <div class="tab-content" id="nav-tabContent">
+							{% for obj in obj_list %}
+				      	<div class="tab-pane fade" id="list-{{obj.name}}" role="tabpanel" aria-labelledby="{{obj.name}}-list">
+									<table class="table table-bordered">
+										<thead>
+											<th>Тип датчика</th>
+											<th>Имя датчик</th>
+											<th>Значение датчика</th>
+										</thead>
+										<tbody>
+											{% for type in tp %}
+												{% for sens in sens_list%}
+														{% if sens.objfk == obj %}
+															{% if sens.type == type %}
+																{% for value in values_list %}
+																	{% if value.sensfk == sens %}
+																		<tr>
+																			<td>{{type}}</td>
+																			<td>{{sens.name}}</td>
+																			<td>{{value.tem}}</td>
+																		</tr>
+																		{% endif %}
+																	{% endfor %}
+																{% endif %}
+														{% endif %}
+												{% endfor %}
+											{% endfor %}
+										</tbody>
+									</table>
+								</div>
+							{% endfor %}
+				    </div>
+					</div>
+				<div class="col-1"></div>
+			<div class="row"></div>
+	  </div>
+	</body>
+</html>

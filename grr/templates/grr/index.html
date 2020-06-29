@@ -1,0 +1,44 @@
+<!doctype  html>
+<html  lang="ru">
+	<head>
+		<link  rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"  crossorigin="anonymous">
+		<title>Авторизация</title>
+	</head>
+	<body>
+	  <div  class="container-fluid">
+			<div class="row"></div>
+			<div class="row">
+			<div  class="col">
+				<div  class="row">
+					<div class="col"></div>
+						<form action ="{% url 'logg' %}" method="POST">
+							<ul class="list-group">
+								<li class="list-group-item">
+									<h1  class="text-center">Авторизация</h1>
+								</li>
+									{% csrf_token %}
+								<li class="list-group-item">
+									{{ form.login }}
+								</li>
+								<li class="list-group-item">
+									{{ form.password }}
+								</li>
+								<li class="list-group-item">
+									<div class="row">
+										<div class="col"></div>
+										<div class="col">
+											<button type= "submit" class="btn btn-primary">Войти</button>
+										</div>
+										<div class="col"></div>
+									</div>
+								</li>
+							</ul>
+						</form>
+					<div class="col"></div>
+				</div>
+			</div>
+			</div>
+			<div class="row"></div>
+	  </div>
+	</body>
+</html>

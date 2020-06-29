@@ -1,0 +1,77 @@
+<!doctype  html>
+<html  lang="ru">
+	<head>
+		<link  rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"  integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"  crossorigin="anonymous">
+		<title>График</title>
+		<script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+		<script>
+			Plotly.d3.csv("https://raw.githubusercontent.com/plotly/datasets/master/finance-charts-apple.csv", function(err, rows){
+
+			var trace1 = {
+			type: "scatter",
+			mode: "lines",
+			name: 'Температура',
+			x: [{% for str in values_x %}'{{str}}',{% endfor %}],
+			y: {{values_y}},
+			line: {color: '#007bff'}
+			}
+
+			var data = [trace1];
+
+			var layout = {
+			title: 'Температура',
+			xaxis: {
+				autorange: true,
+				rangeselector: {buttons: [
+						{
+							count: 1,
+							label: '1m',
+							step: 'month',
+							stepmode: 'backward'
+						},
+						{
+							count: 6,
+							label: '6m',
+							step: 'month',
+							stepmode: 'backward'
+						},
+						{step: 'all'}
+					]},
+				rangeslider: {autorange: true},
+				type: 'date'
+			},
+			yaxis: {
+				autorange: true,
+				type: 'linear'
+			}
+			};
+
+			Plotly.newPlot('myDiv', data, layout);
+			})
+		</script>
+	</head>
+	<body>
+	  <div  class="container-fluid">
+			<div class="row"></div>
+			<div class="row">
+			<div  class="col">
+				<div class="col"></div>
+				<div class="col">
+				<ul class="list-group">
+					<li class="list-group-item">
+						<div id="myDiv"></div>
+					</li>
+					<li class="list-group-item">
+						<form action ="{% url 'lk' %}">
+							<button type= "submit" class="btn btn-primary">Вернуться</button>
+						</form>
+					</li>
+				</ul>
+				</div>
+				<div class="col"></div>
+			</div>
+			</div>
+			<div class="row"></div>
+	  </div>
+	</body>
+</html>
